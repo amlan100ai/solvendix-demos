@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ZZZ Test Business — Demo</title>
+<meta name="robots" content="noindex, nofollow" />
+<link rel="icon" href="public/images/favicon-96.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="public/images/favicon-32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="public/images/favicon-16.png" />
+<link rel="apple-touch-icon" href="public/images/favicon-180.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --dark: #0b4f9e;
+    --darker: #072b54;
+    --blue: #0b4f9e;
+    --blue-dark: #072b54;
+    --blue-soft: rgba(11,79,158,0.08);
+    --tint: #f2f6fb;
+    --white: #FFFFFF;
+    --text: #16202e;
+    --muted: #5b6676;
+    --border: #dce6f2;
+    --btn: #0b4f9e;
+    --btn-text: #ffffff;
+    --btn-hover: #1a63bd;
+    --hl: #9fc4f0;
+    --hl2: #7fb2ee;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--white); color: var(--text); font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6; }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+  nav { position: sticky; top: 0; z-index: 40; background: rgba(7,43,84,0.95); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid rgba(255,255,255,0.08); }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 74px; gap: 16px; }
+  .brand { display: flex; align-items: center; gap: 12px; color: #fff; font-weight: 800; font-size: 15px; letter-spacing: 0.02em; min-width: 0; }
+  .brand img { height: 42px; width: 42px; border-radius: 18%; flex-shrink: 0; }
+  .brand span { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+  .nav-links { display: flex; gap: 26px; font-size: 12.5px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+  .nav-links a { color: rgba(255,255,255,0.72); }
+  .nav-links a:hover { color: #fff; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; background: var(--btn); color: var(--btn-text); font-weight: 700; font-size: 13.5px; padding: 12px 22px; border-radius: 8px; border: none; cursor: pointer; transition: background .15s ease, transform .15s ease; white-space: nowrap; }
+  .btn:hover { background: var(--btn-hover); transform: translateY(-1px); }
+  .btn-sm { padding: 10px 18px; font-size: 12.5px; }
+  .btn-outline { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,0.38); }
+  .btn-outline:hover { background: rgba(255,255,255,0.08); }
+  .btn-light { background: #fff; color: var(--dark); }
+  .btn-light:hover { background: var(--tint); }
+  nav .btn-sm { flex-shrink: 0; }
+
+  header.hero { background: linear-gradient(170deg, var(--dark) 0%, var(--darker) 100%); padding: 80px 0 70px; position: relative; overflow: hidden; }
+  header.hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 700px 360px at 60% 90%, rgba(11,79,158,0.3), transparent 60%); pointer-events: none; }
+  .hero-inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px; align-items: center; }
+  .hero-kicker { display: inline-flex; align-items: center; gap: 8px; color: var(--hl); font-weight: 700; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 18px; }
+  .hero-kicker .dot { width: 6px; height: 6px; border-radius: 50%; background: #6fd67f; box-shadow: 0 0 0 3px rgba(111,214,127,0.2); }
+  h1 { font-size: 42px; font-weight: 800; color: #fff; line-height: 1.15; margin-bottom: 18px; text-wrap: balance; letter-spacing: -0.01em; }
+  h1 .accent { color: var(--hl); }
+  header.hero p.sub { font-size: 16px; color: rgba(255,255,255,0.8); max-width: 520px; margin: 0 0 30px; line-height: 1.75; }
+  .cta-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .hero-badges { display: flex; gap: 22px; margin-top: 34px; flex-wrap: wrap; }
+  .hero-badge { display: flex; align-items: center; gap: 10px; }
+  .hero-badge .num { font-size: 24px; font-weight: 800; color: #fff; }
+  .hero-badge .lbl { font-size: 11px; color: rgba(255,255,255,0.62); text-transform: uppercase; letter-spacing: 0.04em; max-width: 96px; line-height: 1.3; }
+
+  .glance { background: #fff; border-radius: 20px; padding: 28px; box-shadow: 0 30px 70px rgba(0,0,0,0.4); }
+  .glance h3 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--blue); margin-bottom: 16px; }
+  .glance li { list-style: none; display: flex; gap: 12px; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 14px; color: var(--text); }
+  .glance li:last-child { border-bottom: none; }
+  .glance li svg { width: 20px; height: 20px; color: var(--blue); flex-shrink: 0; margin-top: 2px; }
+  .glance li strong { display: block; font-size: 14.5px; }
+  .glance li span { color: var(--muted); font-size: 13px; }
+
+  section { padding: 78px 0; }
+  section.alt { background: var(--tint); }
+  .section-head { text-align: center; max-width: 660px; margin: 0 auto 44px; }
+  .section-head .kicker { color: var(--blue); font-weight: 700; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 10px; display: block; }
+  .section-head h2 { font-size: 31px; font-weight: 800; margin-bottom: 12px; color: var(--dark); letter-spacing: -0.01em; }
+  .section-head p { color: var(--muted); font-size: 15px; line-height: 1.7; }
+
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .service-card { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 26px 22px; box-shadow: 0 10px 26px rgba(11,79,158,0.06); transition: border-color .15s ease, transform .15s ease; }
+  .service-card:hover { border-color: rgba(11,79,158,0.4); transform: translateY(-2px); }
+  .service-card .ico { width: 44px; height: 44px; border-radius: 12px; background: var(--blue-soft); color: var(--blue); display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+  .service-card .ico svg { width: 22px; height: 22px; }
+  .service-card h3 { font-size: 15.5px; font-weight: 700; margin-bottom: 8px; }
+  .service-card p { color: var(--muted); font-size: 13.5px; line-height: 1.7; }
+
+  .trust-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .trust-card { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 26px 22px; text-align: center; }
+  .trust-card .ico-wrap { width: 48px; height: 48px; border-radius: 50%; background: var(--blue-soft); color: var(--blue); display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; }
+  .trust-card .ico-wrap svg { width: 22px; height: 22px; }
+  .trust-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; color: var(--dark); }
+  .trust-card p { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+  .area-card { background: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%); border-radius: 20px; padding: 44px; color: #fff; display: grid; grid-template-columns: 1fr 1fr; gap: 36px; align-items: center; }
+  .area-card h3 { font-size: 24px; font-weight: 800; margin-bottom: 12px; }
+  .area-card p { color: rgba(255,255,255,0.82); font-size: 14.5px; line-height: 1.8; }
+  .area-card ul { list-style: none; }
+  .area-card li { display: flex; gap: 10px; margin-bottom: 12px; font-size: 14px; color: rgba(255,255,255,0.9); }
+  .area-card li svg { width: 18px; height: 18px; color: var(--hl); flex-shrink: 0; margin-top: 2px; }
+
+  .info-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+  .info-card { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
+  .info-card h3 { font-size: 13px; font-weight: 700; margin-bottom: 14px; color: var(--blue); text-transform: uppercase; letter-spacing: 0.06em; }
+  .info-card p { color: var(--muted); font-size: 14px; line-height: 1.7; margin-bottom: 4px; }
+  .info-card p strong { color: var(--text); }
+  .info-card a.link { color: var(--blue); font-weight: 600; text-decoration: underline; word-break: break-word; }
+
+  .final-cta { text-align: center; background: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%); color: #fff; }
+  .final-cta h2 { font-size: 31px; font-weight: 800; margin-bottom: 14px; color: #fff; }
+  .final-cta p { color: rgba(255,255,255,0.85); font-size: 15px; margin: 0 auto 28px; max-width: 540px; }
+  .final-cta .cta-row { justify-content: center; }
+
+  footer { padding: 44px 0; background: var(--darker); }
+  footer .wrap { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; }
+  footer img { height: 50px; width: 50px; margin-bottom: 12px; border-radius: 18%; }
+  footer p { color: rgba(255,255,255,0.55); font-size: 13px; }
+  footer .biz-name { color: #fff; font-weight: 800; font-size: 16px; margin-bottom: 4px; }
+  footer a.solv { color: var(--hl); font-weight: 700; text-decoration: underline; }
+  footer a.fb-link { color: rgba(255,255,255,0.75); text-decoration: underline; }
+
+  @media (max-width: 900px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .info-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .services-grid { grid-template-columns: 1fr 1fr; }
+    .trust-grid { grid-template-columns: 1fr; }
+    .area-card { grid-template-columns: 1fr; padding: 32px; }
+    h1 { font-size: 31px; }
+  }
+  @media (max-width: 520px) { .services-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 460px) {
+    .brand { font-size: 12px; }
+    nav .btn-sm { padding: 9px 12px; font-size: 11px; }
+  }
+
+  #chat-launcher { position: fixed; bottom: 24px; right: 24px; z-index: 50; width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, var(--blue), var(--blue-dark)); display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 8px 24px rgba(11,79,158,0.45); transition: transform .15s ease; }
+  #chat-launcher:hover { transform: scale(1.05); }
+  #chat-launcher svg { width: 26px; height: 26px; color: #fff; }
+  #chat-panel { position: fixed; bottom: 96px; right: 24px; z-index: 50; width: 340px; max-width: calc(100vw - 32px); height: 440px; max-height: calc(100vh - 140px); background: #fff; border: 1px solid var(--border); border-radius: 18px; display: none; flex-direction: column; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+  #chat-panel.open { display: flex; }
+  #chat-panel .chat-head { padding: 16px 18px; display: flex; align-items: center; gap: 10px; background: var(--dark); color: #fff; }
+  #chat-panel .chat-head .dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; }
+  #chat-panel .chat-head span { font-weight: 700; font-size: 14px; flex: 1; }
+  #chat-close { background: none; border: none; color: rgba(255,255,255,0.7); cursor: pointer; padding: 4px; display: flex; align-items: center; justify-content: center; }
+  #chat-close:hover { color: #fff; }
+  #chat-body { flex: 1; overflow-y: auto; padding: 16px 18px; display: flex; flex-direction: column; gap: 12px; }
+  .bubble { max-width: 88%; padding: 10px 14px; border-radius: 14px; font-size: 13.5px; line-height: 1.55; }
+  .bubble.bot { background: var(--tint); color: var(--text); align-self: flex-start; border-bottom-left-radius: 4px; }
+  .bubble.user { background: var(--blue); color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
+  .bubble a { color: var(--blue); text-decoration: underline; font-weight: 600; }
+  #chat-form { display: flex; gap: 8px; padding: 14px; border-top: 1px solid var(--border); }
+  #chat-input { flex: 1; background: var(--tint); border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; color: var(--text); font-size: 13.5px; font-family: inherit; }
+  #chat-input:focus { outline: none; border-color: var(--blue); }
+  #chat-send { background: var(--blue); color: #fff; border: none; border-radius: 10px; width: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand"><img src="public/images/logo-rounded.png" alt="ZZZ Test Business" /><span>ZZZ TEST</span></div>
+    <div class="nav-links">
+      <a href="#services">SERVICES</a>
+      <a href="#why">WHY US</a>
+      <a href="#area">TEST</a>
+      <a href="#contact">CONTACT</a>
+    </div>
+    <a href="tel:+15555555555" class="btn btn-sm">Call (555) 555-5555</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-inner">
+    <div>
+      <span class="hero-kicker"><span class="dot"></span> Testville, ZZ</span>
+      <h1>This is a routing test. <span class="accent">Not a real prospect.</span></h1>
+      <p class="sub">This demo exists only to confirm the shared-project nested-path pipeline works end to end before using it on a real prospect.</p>
+      <div class="cta-row">
+        <a href="tel:+15555555555" class="btn">Call (555) 555-5555</a>
+        <a href="mailto:test@example.com" class="btn btn-outline">Email Us</a>
+      </div>
+      <div class="hero-badges">
+        <div class="hero-badge"><span class="num">Test</span><span class="lbl">Not real</span></div>
+        <div class="hero-badge"><span class="num">Test</span><span class="lbl">Not real</span></div>
+        <div class="hero-badge"><span class="num">Test</span><span class="lbl">Not real</span></div>
+      </div>
+    </div>
+    <div class="glance">
+      <h3>At a glance</h3>
+      <ul>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><div><strong>Test</strong><span>Test</span></div></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><div><strong>Test</strong><span>Test</span></div></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><div><strong>Test</strong><span>Test</span></div></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg><div><strong>Test</strong><span>test@example.com</span></div></li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<section class="alt" id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">What We Offer</span>
+      <h2>Test Services</h2>
+      <p>Test.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg></div>
+        <h3>Test</h3>
+        <p>Test.</p>
+      </div>
+      <div class="service-card">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg></div>
+        <h3>Test</h3>
+        <p>Test.</p>
+      </div>
+      <div class="service-card">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></div>
+        <h3>Test</h3>
+        <p>Test.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="why">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Test</span>
+      <h2>Test</h2>
+    </div>
+    <div class="trust-grid">
+      <div class="trust-card">
+        <div class="ico-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg></div>
+        <h3>Test</h3>
+        <p>Test.</p>
+      </div>
+      <div class="trust-card">
+        <div class="ico-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h3>Test</h3>
+        <p>Test.</p>
+      </div>
+      <div class="trust-card">
+        <div class="ico-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg></div>
+        <h3>Test</h3>
+        <p>Test.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="area">
+  <div class="wrap">
+    <div class="area-card">
+      <div>
+        <h3>Testville, ZZ</h3>
+        <p>Test.</p>
+      </div>
+      <ul>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Test</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Test</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Test</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Test</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="final-cta">
+  <div class="wrap">
+    <h2>Test</h2>
+    <p>Test.</p>
+    <div class="cta-row">
+      <a href="tel:+15555555555" class="btn btn-light">Call (555) 555-5555</a>
+      <a href="mailto:test@example.com" class="btn btn-outline">test@example.com</a>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Get In Touch</span>
+      <h2>Contact</h2>
+    </div>
+    <div class="info-grid">
+      <div class="info-card">
+        <h3>Location</h3>
+        <p><strong>ZZZ Test Business</strong></p>
+        <p>Testville, ZZ</p>
+      </div>
+      <div class="info-card">
+        <h3>Phone &amp; Email</h3>
+        <p><a class="link" href="tel:+15555555555">(555) 555-5555</a></p><p style="margin-top:8px;"><a class="link" href="mailto:test@example.com">test@example.com</a></p>
+      </div>
+      <div class="info-card">
+        <h3>Find Us Online</h3>
+        <p><a class="link" href="https://www.facebook.com/test/" target="_blank" rel="noopener noreferrer">ZZZ Test Business on Facebook →</a></p><p style="margin-top:12px;">Test.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <img src="public/images/logo-rounded.png" alt="ZZZ Test Business" />
+    <p class="biz-name">ZZZ Test Business</p>
+    <p>Testville, ZZ  ·  Test</p>
+    <p><a class="fb-link" href="tel:+15555555555">(555) 555-5555</a> &nbsp;·&nbsp; <a class="fb-link" href="https://www.facebook.com/test/" target="_blank" rel="noopener noreferrer">Facebook</a></p>
+    <p style="margin-top:10px;">Demo redesign by <a href="https://solvendix.com" target="_blank" rel="noopener noreferrer" class="solv">Solvendix</a></p>
+  </div>
+</footer>
+
+<div id="chat-launcher" onclick="toggleChat()">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+</div>
+
+<div id="chat-panel">
+  <div class="chat-head">
+    <div class="dot"></div>
+    <span>Chat with us</span>
+    <button id="chat-close" onclick="toggleChat()" aria-label="Close chat">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <div id="chat-body">
+    <div class="bubble bot">Test greeting.</div>
+  </div>
+  <form id="chat-form" onsubmit="return handleSend(event)">
+    <input id="chat-input" type="text" placeholder="Type a message..." autocomplete="off" />
+    <button id="chat-send" type="submit" aria-label="Send">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+    </button>
+  </form>
+</div>
+
+<script>
+  const REPLY = "This chatbot will be your website's 24/7 assistant — answering clients' questions about your test and booking appointments instantly, so you never lose a customer to a missed message.<br><br>Businesses that add a 24/7 AI chatbot usually see more booked appointments and fewer lost leads — often a noticeable jump in monthly revenue, since it catches customers your site would otherwise lose. <a href=\"https://solvendix.com/how-chatbot-works\" target=\"_blank\" rel=\"noopener noreferrer\">See how it works →</a><br><br>Curious how this would work for your business? Book a free 15-minute discovery call with Solvendix and we'll help you implement everything you need: <a href=\"https://solvendix.com/book\" target=\"_blank\" rel=\"noopener noreferrer\">solvendix.com/book</a>";
+
+  function toggleChat() { document.getElementById('chat-panel').classList.toggle('open'); }
+
+  function handleSend(e) {
+    e.preventDefault();
+    const input = document.getElementById('chat-input');
+    const body = document.getElementById('chat-body');
+    const text = input.value.trim();
+    if (!text) return false;
+    const userBubble = document.createElement('div');
+    userBubble.className = 'bubble user';
+    userBubble.textContent = text;
+    body.appendChild(userBubble);
+    input.value = '';
+    body.scrollTop = body.scrollHeight;
+    setTimeout(() => {
+      const botBubble = document.createElement('div');
+      botBubble.className = 'bubble bot';
+      botBubble.innerHTML = REPLY;
+      body.appendChild(botBubble);
+      body.scrollTop = body.scrollHeight;
+    }, 500);
+    return false;
+  }
+</script>
+
+</body>
+</html>
